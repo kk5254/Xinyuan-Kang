@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computational Inequality: The Forced Binary of Classification Systems</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="hero">
+        <h1>Computational Inequality</h1>
+        <p class="subtitle">How Classification Systems Erase Edge Cases Through Forced Binary Logic</p>
+        <div class="scroll-indicator">↓ Scroll to explore</div>
+    </header>
+
+    <!-- Panel 1: Data Origins -->
+    <section class="panel" id="panel1">
+        <div class="panel-number">01</div>
+        <div class="panel-content">
+            <h2>Data Origins: Missing Signals</h2>
+            <div class="panel-visual">
+                <!-- Week 1: Elsagate Metadata Visualization -->
+                <div class="image-grid">
+                    <div class="image-item">
+                        <img src="images/elsa_vampire.png" alt="Elsagate Example: Elsa + Vampire">
+                        <p class="image-caption">Example: "Superheroes Vampire Elsa" - Child IP + Horror elements</p>
+                    </div>
+                    <div class="metadata-table">
+                        <h4>Platform Metadata Captured:</h4>
+                        <ul>
+                            <li>✓ Title</li>
+                            <li>✓ Channel Name</li>
+                            <li>✓ View Count</li>
+                            <li>✓ Upload Date</li>
+                        </ul>
+                        <h4>Missing Signals:</h4>
+                        <ul class="missing">
+                            <li>✗ Risk Keywords ("Vampire", "Terror")</li>
+                            <li>✗ Psychological Harm Indicators</li>
+                            <li>✗ Cultural Context</li>
+                            <li>✗ Content Risk Score</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-caption">
+                <p>The YouTube metadata system captures titles, channels, and view counts, but fails to record critical signals: content risk cues ("Vampire", "Terror"), psychological harm indicators, and non-English semantic connotations. These missing signals demonstrate how platform infrastructure renders certain harms invisible from the outset.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Panel 2: Classification Enforcement -->
+    <section class="panel" id="panel2">
+        <div class="panel-number">02</div>
+        <div class="panel-content">
+            <h2>Classification Enforcement: Taxonomy Limits</h2>
+            <div class="panel-visual">
+                <!-- Week 2: Five-Dimension Taxonomy Visualization -->
+                <div class="taxonomy-diagram">
+                    <div class="taxonomy-box">
+                        <h4>1. Alienation of Children's Images</h4>
+                        <p>Image Distortion | Abnormal Behavior</p>
+                    </div>
+                    <div class="taxonomy-box">
+                        <h4>2. Horrorization of Children's IP</h4>
+                        <p>Horror Scenery | Plot Horror</p>
+                    </div>
+                    <div class="taxonomy-box">
+                        <h4>3. Threat / Intimidation</h4>
+                        <p>Character Threat | Postural Intimidation</p>
+                    </div>
+                    <div class="taxonomy-box">
+                        <h4>4. Murder Narrative Implication</h4>
+                        <p>Victim-Attacker Composition | Death Scene</p>
+                    </div>
+                    <div class="taxonomy-box">
+                        <h4>5. Child-Coded Presence</h4>
+                        <p>Childlike elements in harm context</p>
+                    </div>
+                    <div class="collapsed-section">
+                        <h4>↴ Collapsed / Uncaptured:</h4>
+                        <ul>
+                            <li>Emotional Harm</li>
+                            <li>Implied Value Harm</li>
+                            <li>Hybrid Cases (multiple categories)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-caption">
+                <p>The five-dimension taxonomy (Alienation, Horrorization, Threat, Murder Narrative, Child-Coded Presence) forces hybrid content into discrete categories. When an image contains both "IP Horrorization" and "Death Narrative Implication," the system must choose one, erasing multidimensional meaning. Emotional harm and implied value harm remain entirely uncaptured.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Panel 3: Model Behavior -->
+    <section class="panel" id="panel3">
+        <div class="panel-number">03</div>
+        <div class="panel-content">
+            <h2>Model Behavior: Boundary State Instability</h2>
+            <div class="panel-visual">
+                <!-- Interactive confidence visualization -->
+                <div class="confidence-demo">
+                    <div class="hand-position-slider">
+                        <label for="handPosition">Hand Position:</label>
+                        <input type="range" id="handPosition" min="0" max="100" value="50">
+                        <div class="position-labels">
+                            <span>Hand Down</span>
+                            <span>Shoulder Height</span>
+                            <span>Hand Up</span>
+                        </div>
+                    </div>
+                    <div class="confidence-display">
+                        <div class="confidence-bar">
+                            <div class="label">Hand Down:</div>
+                            <div class="bar-container">
+                                <div class="bar" id="handDownBar"></div>
+                                <span class="percentage" id="handDownPercent">50%</span>
+                            </div>
+                        </div>
+                        <div class="confidence-bar">
+                            <div class="label">Hand Up:</div>
+                            <div class="bar-container">
+                                <div class="bar" id="handUpBar"></div>
+                                <span class="percentage" id="handUpPercent">50%</span>
+                            </div>
+                        </div>
+                        <div class="prediction" id="prediction">Prediction: Uncertain</div>
+                    </div>
+                </div>
+                <!-- Evidence Images from Week 3 -->
+                <div class="evidence-gallery">
+                    <h4>Evidence: Label Flipping at Boundary</h4>
+                    <div class="gallery-grid">
+                        <div class="gallery-item">
+                            <img src="images/hand_boundary_55.png" alt="Shoulder height: 55% confidence">
+                            <p>Same posture: 55% Hand Down</p>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="images/hand_boundary_76.png" alt="Shoulder height: 76% confidence">
+                            <p>Same posture: 76% Hand Down</p>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="images/hand_up_100.png" alt="Hand up: 100% confidence">
+                            <p>Clear case: 100% Hand Up</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-caption">
+                <p>The binary taxonomy (Hand_Up/Hand_Down) forces a sharp boundary on continuous physical movement. At shoulder height, the model exhibits "label flipping"—confidence shifts from 55% to 76% for the same approximate posture. The human-obvious "half-raised" state is computationally illegible, demonstrating how classification design collapses continuous reality into forced discrete choices.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Panel 4: Intervention Visualization -->
+    <section class="panel" id="panel4">
+        <div class="panel-number">04</div>
+        <div class="panel-content">
+            <h2>Intervention Visualization: The Governance Power of Thresholds</h2>
+            <div class="panel-visual">
+                <!-- Interactive threshold visualization -->
+                <div class="threshold-demo">
+                    <div class="threshold-control">
+                        <label for="thresholdSlider">Event Threshold:</label>
+                        <input type="range" id="thresholdSlider" min="0" max="100" value="55">
+                        <span class="threshold-value" id="thresholdValue">55</span>
+                    </div>
+                    <div class="data-stream" id="dataStream">
+                        <!-- Data points will be generated by JS -->
+                    </div>
+                    <div class="event-stats">
+                        <div class="stat">
+                            <span class="stat-label">Total Samples:</span>
+                            <span class="stat-value" id="totalSamples">50</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Above Threshold:</span>
+                            <span class="stat-value" id="aboveThreshold">-</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Eligible Events:</span>
+                            <span class="stat-value" id="eligibleEvents">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-caption">
+                <p>The threshold slider demonstrates governance power: budget constraints determine what becomes "visible" as data. Setting threshold at 55 vs 80 fundamentally changes which events count as real. This pre-algorithmic gate shapes the entire downstream pipeline—what the model can learn, what patterns emerge, what inequalities become computationally legible.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Panel 5: Theory of Change -->
+    <section class="panel" id="panel5">
+        <div class="panel-number">05</div>
+        <div class="panel-content">
+            <h2>Theory of Change: From Forced Binary to Continuous Spectrum</h2>
+            <div class="panel-visual theory-visual">
+                <div class="spectrum-comparison">
+                    <div class="binary-side">
+                        <h3>Current: Forced Binary</h3>
+                        <div class="binary-box">
+                            <div class="category">Category A</div>
+                            <div class="gap">???</div>
+                            <div class="category">Category B</div>
+                        </div>
+                        <ul class="problem-list">
+                            <li>Edge cases forced into false certainty</li>
+                            <li>Confidence scores mislead</li>
+                            <li>Continuous reality collapsed</li>
+                        </ul>
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="continuous-side">
+                        <h3>Proposed: Continuous Spectrum</h3>
+                        <div class="spectrum-box">
+                            <div class="gradient"></div>
+                            <div class="markers">
+                                <span>A</span>
+                                <span>A/B</span>
+                                <span>B</span>
+                            </div>
+                        </div>
+                        <ul class="solution-list">
+                            <li>Uncertainty explicitly represented</li>
+                            <li>Multi-label for hybrid cases</li>
+                            <li>Context-dependent thresholds</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-caption">
+                <p>Computational inequality emerges when classification systems impose discrete categories on continuous phenomena. The solution requires redesigning taxonomies to accommodate uncertainty, hybridity, and context-dependency. This means: adding "boundary" categories, allowing multi-label classification, and building confidence calibration that reflects genuine epistemic uncertainty rather than false precision.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>Computational Inequalities Final Project</p>
+            <p>Five Weekly Tasks: Week 1, 2, 3, 5, 7</p>
+            <p class="github-link">View on GitHub: <a href="#" target="_blank">[Your Repository Link]</a></p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
