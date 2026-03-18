@@ -7,15 +7,52 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- 滚动进度条 - Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- 固定导航栏 - Fixed Navigation Bar -->
+    <nav class="fixed-nav" id="fixedNav">
+        <div class="nav-logo">CI</div>
+        <ul class="nav-links">
+            <li><a href="#panel1" class="nav-link" data-panel="1">01 Data</a></li>
+            <li><a href="#panel2" class="nav-link" data-panel="2">02 Taxonomy</a></li>
+            <li><a href="#panel3" class="nav-link" data-panel="3">03 Model</a></li>
+            <li><a href="#panel4" class="nav-link" data-panel="4">04 Threshold</a></li>
+            <li><a href="#panel5" class="nav-link" data-panel="5">05 Change</a></li>
+        </ul>
+        <div class="nav-indicator" id="navIndicator">Panel 1/5</div>
+    </nav>
+
+    <!-- 图片Lightbox - Image Lightbox Modal -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" id="lightboxClose">&times;</span>
+        <img class="lightbox-img" id="lightboxImg" src="" alt="Enlarged Image">
+        <div class="lightbox-caption" id="lightboxCaption"></div>
+    </div>
+
     <!-- Header Section -->
     <header class="hero">
         <h1>Computational Inequality</h1>
         <p class="subtitle">How Classification Systems Erase Edge Cases Through Forced Binary Logic</p>
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <span class="stat-num">5</span>
+                <span class="stat-desc">Weekly Tasks</span>
+            </div>
+            <div class="hero-stat">
+                <span class="stat-num">8</span>
+                <span class="stat-desc">Weeks of Data</span>
+            </div>
+            <div class="hero-stat">
+                <span class="stat-num">∞</span>
+                <span class="stat-desc">Edge Cases</span>
+            </div>
+        </div>
         <div class="scroll-indicator">↓ Scroll to explore</div>
     </header>
 
     <!-- Panel 1: Data Origins -->
-    <section class="panel" id="panel1">
+    <section class="panel fade-in" id="panel1">
         <div class="panel-number">01</div>
         <div class="panel-content">
             <h2>Data Origins: Missing Signals</h2>
@@ -23,7 +60,7 @@
                 <!-- Week 1: Elsagate Metadata Visualization -->
                 <div class="image-grid">
                     <div class="image-item">
-                        <img src="images/elsa_vampire.png" alt="Elsagate Example: Elsa + Vampire">
+                        <img src="images/elsa_vampire.png" alt="Elsagate Example: Elsa + Vampire" class="clickable-img" data-caption="Elsagate Example: Child-friendly IP combined with horror elements (Vampire Elsa)">
                         <p class="image-caption">Example: "Superheroes Vampire Elsa" - Child IP + Horror elements</p>
                     </div>
                     <div class="metadata-table">
@@ -51,7 +88,7 @@
     </section>
 
     <!-- Panel 2: Classification Enforcement -->
-    <section class="panel" id="panel2">
+    <section class="panel fade-in" id="panel2">
         <div class="panel-number">02</div>
         <div class="panel-content">
             <h2>Classification Enforcement: Taxonomy Limits</h2>
@@ -87,6 +124,19 @@
                         </ul>
                     </div>
                 </div>
+                <!-- 交互：分类复杂度指示器 -->
+                <div class="complexity-meter">
+                    <h4>Classification Complexity</h4>
+                    <div class="meter-container">
+                        <div class="meter-fill" id="complexityMeter"></div>
+                    </div>
+                    <div class="meter-labels">
+                        <span>Simple</span>
+                        <span>Hybrid</span>
+                        <span>Uncapturable</span>
+                    </div>
+                    <p class="meter-note">Hover over taxonomy boxes to see complexity</p>
+                </div>
             </div>
             <div class="panel-caption">
                 <p>The five-dimension taxonomy (Alienation, Horrorization, Threat, Murder Narrative, Child-Coded Presence) forces hybrid content into discrete categories. When an image contains both "IP Horrorization" and "Death Narrative Implication," the system must choose one, erasing multidimensional meaning. Emotional harm and implied value harm remain entirely uncaptured.</p>
@@ -95,7 +145,7 @@
     </section>
 
     <!-- Panel 3: Model Behavior -->
-    <section class="panel" id="panel3">
+    <section class="panel fade-in" id="panel3">
         <div class="panel-number">03</div>
         <div class="panel-content">
             <h2>Model Behavior: Boundary State Instability</h2>
@@ -132,19 +182,32 @@
                 <!-- Evidence Images from Week 3 -->
                 <div class="evidence-gallery">
                     <h4>Evidence: Label Flipping at Boundary</h4>
-                    <div class="gallery-grid">
-                        <div class="gallery-item">
-                            <img src="images/hand_boundary_55.png" alt="Shoulder height: 55% confidence">
-                            <p>Same posture: 55% Hand Down</p>
+                    <!-- 横向滑动轮播 - Horizontal Carousel -->
+                    <div class="carousel-container">
+                        <button class="carousel-btn carousel-prev" id="carouselPrev">❮</button>
+                        <div class="carousel-track-wrapper">
+                            <div class="carousel-track" id="carouselTrack">
+                                <div class="carousel-item" data-index="0">
+                                    <img src="images/hand_boundary_55.png" alt="Shoulder height: 55% confidence" class="clickable-img" data-caption="Boundary Case: 55% confidence - Label instability at shoulder height">
+                                    <p>Same posture: 55% Hand Down</p>
+                                </div>
+                                <div class="carousel-item" data-index="1">
+                                    <img src="images/hand_boundary_76.png" alt="Shoulder height: 76% confidence" class="clickable-img" data-caption="Boundary Case: 76% confidence - Same posture, different prediction">
+                                    <p>Same posture: 76% Hand Down</p>
+                                </div>
+                                <div class="carousel-item" data-index="2">
+                                    <img src="images/hand_up_100.png" alt="Hand up: 100% confidence" class="clickable-img" data-caption="Clear Case: 100% confidence - Unambiguous hand-up position">
+                                    <p>Clear case: 100% Hand Up</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="gallery-item">
-                            <img src="images/hand_boundary_76.png" alt="Shoulder height: 76% confidence">
-                            <p>Same posture: 76% Hand Down</p>
-                        </div>
-                        <div class="gallery-item">
-                            <img src="images/hand_up_100.png" alt="Hand up: 100% confidence">
-                            <p>Clear case: 100% Hand Up</p>
-                        </div>
+                        <button class="carousel-btn carousel-next" id="carouselNext">❯</button>
+                    </div>
+                    <!-- 轮播指示器 - Carousel Indicators -->
+                    <div class="carousel-indicators" id="carouselIndicators">
+                        <span class="indicator active" data-index="0"></span>
+                        <span class="indicator" data-index="1"></span>
+                        <span class="indicator" data-index="2"></span>
                     </div>
                 </div>
             </div>
@@ -155,7 +218,7 @@
     </section>
 
     <!-- Panel 4: Intervention Visualization -->
-    <section class="panel" id="panel4">
+    <section class="panel fade-in" id="panel4">
         <div class="panel-number">04</div>
         <div class="panel-content">
             <h2>Intervention Visualization: The Governance Power of Thresholds</h2>
@@ -183,6 +246,16 @@
                             <span class="stat-label">Eligible Events:</span>
                             <span class="stat-value" id="eligibleEvents">-</span>
                         </div>
+                        <div class="stat">
+                            <span class="stat-label">Visibility Rate:</span>
+                            <span class="stat-value" id="visibilityRate">-</span>
+                        </div>
+                    </div>
+                    <!-- 预设场景按钮 -->
+                    <div class="preset-buttons">
+                        <button class="preset-btn" data-threshold="30">Low Filter (30)</button>
+                        <button class="preset-btn" data-threshold="55">Standard (55)</button>
+                        <button class="preset-btn" data-threshold="80">High Filter (80)</button>
                     </div>
                 </div>
             </div>
@@ -193,7 +266,7 @@
     </section>
 
     <!-- Panel 5: Theory of Change -->
-    <section class="panel" id="panel5">
+    <section class="panel fade-in" id="panel5">
         <div class="panel-number">05</div>
         <div class="panel-content">
             <h2>Theory of Change: From Forced Binary to Continuous Spectrum</h2>
@@ -230,6 +303,22 @@
                         </ul>
                     </div>
                 </div>
+                <!-- 新增：AI提示工程对比展示 -->
+                <div class="prompt-comparison">
+                    <h4>AI Prompt Engineering: Baseline vs Nuanced</h4>
+                    <div class="prompt-grid">
+                        <div class="prompt-item">
+                            <img src="images/baseline_direct_01.png" alt="Baseline Direct Prompt" class="clickable-img" data-caption="Baseline Prompt: Direct instruction often produces stereotyped outputs">
+                            <p class="prompt-label">Baseline (Direct)</p>
+                            <p class="prompt-desc">Simple instruction → Stereotyped output</p>
+                        </div>
+                        <div class="prompt-item">
+                            <img src="images/nuanced_indirect_01.png" alt="Nuanced Indirect Prompt" class="clickable-img" data-caption="Nuanced Prompt: Contextual framing produces more diverse outputs">
+                            <p class="prompt-label">Nuanced (Indirect)</p>
+                            <p class="prompt-desc">Contextual framing → Diverse output</p>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="panel-caption">
                 <p>Computational inequality emerges when classification systems impose discrete categories on continuous phenomena. The solution requires redesigning taxonomies to accommodate uncertainty, hybridity, and context-dependency. This means: adding "boundary" categories, allowing multi-label classification, and building confidence calibration that reflects genuine epistemic uncertainty rather than false precision.</p>
@@ -242,7 +331,9 @@
         <div class="footer-content">
             <p>Computational Inequalities Final Project</p>
             <p>Five Weekly Tasks: Week 1, 2, 3, 5, 7</p>
-            <p class="github-link">View on GitHub: <a href="#" target="_blank">[Your Repository Link]</a></p>
+            <p class="github-link">View on GitHub: <a href="https://github.com/kk5254/Xinyuan-Kang" target="_blank">https://github.com/kk5254/Xinyuan-Kang</a></p>
+            <!-- 回到顶部按钮 -->
+            <button class="back-to-top" id="backToTop">↑ Top</button>
         </div>
     </footer>
 

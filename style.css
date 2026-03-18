@@ -14,7 +14,9 @@
     --accent-orange: #ff9900;
     --accent-red: #ff3366;
     --accent-green: #00cc88;
+    --accent-purple: #9966ff;
     --border-color: #2a2a3a;
+    --nav-height: 60px;
 }
 
 /* Reset and Base Styles */
@@ -26,6 +28,10 @@
 
 html {
     scroll-behavior: smooth;
+    /* 滚动吸附改为proximity模式 - 滑到边缘才吸附 */
+    /* Use proximity mode - only snap when near edge */
+    scroll-snap-type: y proximity;
+    overflow-y: scroll;
 }
 
 body {
@@ -49,6 +55,9 @@ body {
     padding: 2rem;
     background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
     position: relative;
+    /* 滚动吸附点 - Scroll snap point */
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
 }
 
 .hero h1 {
@@ -82,6 +91,225 @@ body {
     60% { transform: translateY(-5px); }
 }
 
+/* Hero Stats - 首页统计数据 */
+.hero-stats {
+    display: flex;
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+.hero-stat {
+    text-align: center;
+}
+
+.hero-stat .stat-num {
+    display: block;
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--accent-blue);
+}
+
+.hero-stat .stat-desc {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+/* ========================================
+   Scroll Progress Bar - 滚动进度条
+   ======================================== */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-blue), var(--accent-orange), var(--accent-red));
+    z-index: 1001;
+    transition: width 0.1s ease;
+}
+
+/* ========================================
+   Fixed Navigation - 固定导航栏
+   ======================================== */
+.fixed-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--nav-height);
+    background-color: rgba(10, 10, 15, 0.95);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    z-index: 1000;
+    transform: translateY(-100%);
+    transition: transform 0.3s ease;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.fixed-nav.visible {
+    transform: translateY(0);
+}
+
+.nav-logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, var(--accent-blue), var(--accent-orange));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 0.5rem;
+}
+
+.nav-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--text-primary);
+    background-color: var(--bg-panel);
+}
+
+.nav-link.active {
+    color: var(--accent-blue);
+    background-color: rgba(0, 153, 255, 0.15);
+}
+
+.nav-indicator {
+    font-size: 0.85rem;
+    color: var(--accent-orange);
+    font-weight: 600;
+}
+
+/* ========================================
+   Lightbox - 图片放大查看
+   ======================================== */
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 2rem;
+}
+
+.lightbox.active {
+    display: flex;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 1rem;
+    right: 2rem;
+    font-size: 3rem;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.lightbox-close:hover {
+    color: var(--accent-red);
+}
+
+.lightbox-img {
+    max-width: 90%;
+    max-height: 80vh;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.lightbox-caption {
+    margin-top: 1rem;
+    font-size: 1rem;
+    color: var(--text-secondary);
+    text-align: center;
+    max-width: 600px;
+}
+
+.clickable-img {
+    cursor: zoom-in;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.clickable-img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 5px 20px rgba(0, 153, 255, 0.3);
+}
+
+/* ========================================
+   Fade-in Animation - 淡入动画
+   ======================================== */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ========================================
+   Scroll Snap Bounce - 滚动吸附回弹动画
+   ======================================== */
+.snap-bounce {
+    animation: snapBounce 0.4s ease-out;
+}
+
+@keyframes snapBounce {
+    0% {
+        transform: translateY(-8px);
+    }
+    40% {
+        transform: translateY(4px);
+    }
+    70% {
+        transform: translateY(-2px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* 滚动阻尼过渡效果 - Scroll damping transition */
+.hero,
+.panel {
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* 滚动时的渐变效果 - Scroll indicator pulse */
+.scroll-indicator {
+    animation: bounce 2s infinite, pulseGlow 3s infinite;
+}
+
+@keyframes pulseGlow {
+    0%, 100% {
+        text-shadow: 0 0 0 rgba(0, 153, 255, 0);
+    }
+    50% {
+        text-shadow: 0 0 20px rgba(0, 153, 255, 0.5);
+    }
+}
+
 /* ========================================
    Panel Styles - 面板通用样式
    ======================================== */
@@ -93,6 +321,9 @@ body {
     justify-content: center;
     border-bottom: 1px solid var(--border-color);
     position: relative;
+    /* 滚动吸附点 - Scroll snap point */
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
 }
 
 .panel:nth-child(even) {
@@ -264,6 +495,21 @@ body {
     border-radius: 8px;
     font-weight: 600;
     margin-top: 1rem;
+    transition: all 0.3s ease;
+}
+
+.prediction.stable {
+    border: 2px solid var(--accent-green);
+}
+
+.prediction.unstable {
+    border: 2px solid var(--accent-orange);
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255, 153, 0, 0.4); }
+    50% { box-shadow: 0 0 0 10px rgba(255, 153, 0, 0); }
 }
 
 /* ========================================
@@ -372,6 +618,39 @@ body {
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--accent-blue);
+    transition: color 0.3s ease;
+}
+
+/* Preset Buttons - 预设场景按钮 */
+.preset-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.preset-btn {
+    padding: 0.75rem 1.5rem;
+    border: 2px solid var(--border-color);
+    background-color: var(--bg-primary);
+    color: var(--text-secondary);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.preset-btn:hover {
+    border-color: var(--accent-orange);
+    color: var(--accent-orange);
+    background-color: rgba(255, 153, 0, 0.1);
+}
+
+.preset-btn.active {
+    border-color: var(--accent-orange);
+    background-color: var(--accent-orange);
+    color: var(--bg-primary);
 }
 
 /* ========================================
@@ -481,6 +760,8 @@ footer {
     padding: 3rem 2rem;
     text-align: center;
     border-top: 1px solid var(--border-color);
+    /* 页脚吸附 - Footer snap */
+    scroll-snap-align: end;
 }
 
 .footer-content p {
@@ -495,6 +776,137 @@ footer {
 
 .github-link a:hover {
     text-decoration: underline;
+}
+
+/* Back to Top Button - 回到顶部按钮 */
+.back-to-top {
+    margin-top: 1.5rem;
+    padding: 0.75rem 1.5rem;
+    border: 2px solid var(--accent-blue);
+    background-color: transparent;
+    color: var(--accent-blue);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.back-to-top:hover {
+    background-color: var(--accent-blue);
+    color: var(--bg-primary);
+}
+
+/* ========================================
+   Complexity Meter - 分类复杂度指示器
+   ======================================== */
+.complexity-meter {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background-color: var(--bg-primary);
+    border-radius: 8px;
+}
+
+.complexity-meter h4 {
+    color: var(--accent-purple);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.meter-container {
+    height: 12px;
+    background-color: var(--border-color);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.meter-fill {
+    height: 100%;
+    width: 20%;
+    background: linear-gradient(90deg, var(--accent-green), var(--accent-orange), var(--accent-red));
+    border-radius: 6px;
+    transition: width 0.5s ease;
+}
+
+.meter-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.meter-note {
+    text-align: center;
+    margin-top: 0.75rem;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+/* Taxonomy Box Hover Effect */
+.taxonomy-box {
+    background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+    border: 2px solid var(--accent-blue);
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.taxonomy-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0, 153, 255, 0.2);
+    border-color: var(--accent-orange);
+}
+
+/* ========================================
+   Prompt Comparison - 提示工程对比
+   ======================================== */
+.prompt-comparison {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.prompt-comparison h4 {
+    text-align: center;
+    color: var(--accent-purple);
+    margin-bottom: 1.5rem;
+}
+
+.prompt-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+.prompt-item {
+    text-align: center;
+}
+
+.prompt-item img {
+    width: 100%;
+    border-radius: 8px;
+    border: 2px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.prompt-item img:hover {
+    border-color: var(--accent-purple);
+}
+
+.prompt-label {
+    margin-top: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 1rem;
+}
+
+.prompt-desc {
+    margin-top: 0.25rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
 }
 
 /* ========================================
@@ -529,6 +941,28 @@ footer {
     
     .stat {
         width: 100%;
+    }
+
+    /* 移动端导航样式 */
+    .fixed-nav {
+        padding: 0 1rem;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .hero-stats {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .hero-stat .stat-num {
+        font-size: 2rem;
+    }
+
+    .prompt-grid {
+        grid-template-columns: 1fr;
     }
 }
 
@@ -650,10 +1084,158 @@ footer {
 
 .evidence-gallery h4 {
     color: var(--accent-orange);
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     text-align: center;
 }
 
+/* ========================================
+   Carousel - 图片轮播中央放大效果
+   ======================================== */
+.carousel-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem 0;
+    /* 固定外框高度 - Fixed container height */
+    height: 420px;
+    min-height: 420px;
+}
+
+.carousel-btn {
+    width: 48px;
+    height: 48px;
+    border: 2px solid var(--border-color);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    z-index: 10;
+}
+
+.carousel-btn:hover {
+    border-color: var(--accent-orange);
+    color: var(--accent-orange);
+    background-color: rgba(255, 153, 0, 0.1);
+    transform: scale(1.1);
+}
+
+.carousel-track-wrapper {
+    width: 100%;
+    max-width: 800px;
+    overflow: hidden;
+    position: relative;
+    /* 固定包裹器高度 - Fixed wrapper height */
+    height: 380px;
+    display: flex;
+    align-items: center;
+}
+
+.carousel-track {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    /* 确保轨道对齐 - Ensure track alignment */
+    height: 100%;
+}
+
+.carousel-item {
+    flex: 0 0 auto;
+    width: 160px;
+    text-align: center;
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    opacity: 0.4;
+    transform: scale(0.65);
+    filter: blur(2px);
+    /* 固定项目高度 - Fixed item height */
+    height: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel-item.active {
+    width: 360px;
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+}
+
+.carousel-item.adjacent {
+    width: 180px;
+    opacity: 0.6;
+    transform: scale(0.8);
+    filter: blur(0);
+}
+
+.carousel-item img {
+    width: 100%;
+    max-height: 280px;
+    object-fit: contain;
+    border-radius: 8px;
+    border: 2px solid var(--border-color);
+    transition: all 0.3s ease;
+    cursor: zoom-in;
+}
+
+.carousel-item.active img {
+    max-height: 320px;
+    border-color: var(--accent-orange);
+    box-shadow: 0 10px 40px rgba(255, 153, 0, 0.4);
+}
+
+.carousel-item.active img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 12px 40px rgba(255, 153, 0, 0.4);
+}
+
+.carousel-item p {
+    margin-top: 0.75rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    transition: all 0.3s ease;
+}
+
+.carousel-item.active p {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+/* Carousel Indicators - 轮播指示器 */
+.carousel-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+.carousel-indicators .indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--border-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.carousel-indicators .indicator:hover {
+    background-color: var(--text-secondary);
+    transform: scale(1.2);
+}
+
+.carousel-indicators .indicator.active {
+    background-color: var(--accent-orange);
+    transform: scale(1.3);
+    box-shadow: 0 0 10px rgba(255, 153, 0, 0.5);
+}
+
+/* Gallery Grid - 保留原有网格样式以备他用 */
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
